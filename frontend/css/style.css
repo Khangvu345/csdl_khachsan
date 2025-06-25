@@ -1,0 +1,188 @@
+:root {
+    --color-background: #FFFFFF;
+    --color-sidebar: #F27405; /* Cam */
+    --color-form-bg: #FFFFFF;
+    --color-primary: #F23005; /* Màu chủ đạo - Đỏ cam */
+    --color-primary-hover: #BF0426; /* Đỏ sẫm hơn cho hover */
+    --color-text-dark: #8C0327; /* Đỏ rượu vang đậm nhất cho text và header */
+    --color-text-light: #FFFFFF;
+    --color-accent: #D90452; /* Hồng đậm cho accent
+    --font-family-main: 'Roboto', sans-serif;
+}
+/* Reset và cài đặt chung cho body */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: var(--font-family-main);
+    background-color: #f4f7f6;
+    color: #333;
+}
+
+/* === TRANG ĐĂNG NHẬP === */
+.login-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}
+.login-form-wrapper {
+    width: 100%;
+    max-width: 400px;
+    padding: 20px;
+}
+.login-form {
+    background-color: var(--color-form-bg);
+    padding: 40px;
+    border-radius: 0;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+}
+.login-form h1 {
+    text-align: center; margin-bottom: 30px; font-weight: 700; font-size: 28px; color: var(--color-text-dark);
+}
+
+/* === TRANG DASHBOARD === */
+.dashboard-container {
+    display: flex;
+    height: 100vh;
+}
+
+/* --- Sidebar --- */
+.sidebar {
+    width: 240px;
+    background-color: var(--color-sidebar);
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+}
+.sidebar-title {
+    color: var(--color-text-light); /* Đổi màu chữ trên sidebar để dễ đọc hơn */
+    margin-bottom: 30px;
+    text-align: center;
+    font-weight: 700;
+}
+.sidebar ul {
+    list-style: none;
+    flex-grow: 1;
+}
+.sidebar ul li a {
+    display: block;
+    padding: 12px 15px;
+    text-decoration: none;
+    color: var(--color-text-light); /* Đổi màu chữ trên sidebar */
+    font-weight: 500;
+    border-radius: 4px;
+    margin-bottom: 5px;
+    transition: background-color 0.2s;
+}
+.sidebar ul li a:hover {
+    background-color: rgba(0, 0, 0, 0.1);
+}
+.sidebar ul li a.active {
+    background-color: var(--color-primary);
+    color: var(--color-text-light);
+}
+.logout-container #logout-btn {
+    background-color: var(--color-text-dark);
+}
+
+/* --- Main Content --- */
+.main-content {
+    flex-grow: 1;
+    padding: 30px;
+    overflow-y: auto;
+}
+.content-section {
+    display: none;
+}
+.content-section.active {
+    display: block;
+}
+.section-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+.btn-primary {
+    background-color: var(--color-primary);
+    color: white;
+}
+.btn-primary:hover {
+    background-color: var(--color-primary-hover);
+}
+
+/* --- Table --- */
+.data-table {
+    width: 100%;
+    border-collapse: collapse;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+.data-table th, .data-table td {
+    padding: 12px 15px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+.data-table thead th {
+    background-color: var(--color-text-dark);
+    color: var(--color-text-light);
+}
+.data-table tbody tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+.data-table tbody tr:hover {
+    background-color: #f1f1f1;
+}
+.action-btn {
+    padding: 5px 10px;
+    margin-right: 5px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+.btn-edit { background-color: var(--color-accent); color: white; }
+.btn-delete { background-color: var(--color-text-dark); color: white; }
+.btn-cancel { background-color: #6c757d; color: white; }
+
+/* --- Modal --- */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0; top: 0;
+    width: 100%; height: 100%;
+    background-color: rgba(0,0,0,0.5);
+    align-items: center;
+    justify-content: center;
+}
+.modal-content {
+    background-color: #fff;
+    padding: 30px;
+    border-radius: 5px;
+    width: 90%;
+    max-width: 500px;
+    position: relative;
+}
+.close-btn {
+    position: absolute;
+    top: 10px; right: 15px;
+    font-size: 24px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+/* --- Chung --- */
+button {
+    padding: 10px 15px;
+    border: none;
+    border-radius: 0;
+    cursor: pointer;
+    font-weight: 700;
+    transition: background-color 0.2s;
+}
+.input-group { margin-bottom: 15px; }
+.input-group label { display: block; margin-bottom: 5px; font-weight: 700; }
+.input-group input, .input-group select { width: 100%; padding: 10px; border-radius: 0; border: 1px solid #ccc; }

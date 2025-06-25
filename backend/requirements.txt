@@ -1,0 +1,15 @@
+requirements.txt
+Web framework chính
+fastapi
+
+ASGI server để chạy ứng dụng FastAPI
+uvicorn[standard]
+
+Thư viện để kết nối đến MySQL
+pymysql
+
+Thư viện để quản lý các biến môi trường từ file .env
+python-dotenv
+
+Pydantic là một phần cốt lõi của FastAPI để validation dữ liệu
+pydantic
