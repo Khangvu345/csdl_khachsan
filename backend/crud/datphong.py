@@ -32,18 +32,16 @@ def create(dp: datphong_schema.DatPhongCreate):
                 dp.TrangThaiDatPhong, dp.MaKH, dp.MaPhong
             ))
 
-            # 3. Cập nhật trạng thái phòng thành 'Đã được đặt'
-            sql_update_phong = "UPDATE PHONG SET TinhTrang = 'Đã được đặt' WHERE MaPhong = %s"
+            # 3. Cập nhật trạng thái phòng thành 'Đã đặt'
+            # SỬA LỖI Ở ĐÂY: Bỏ chữ "được" để tuân thủ CHECK constraint
+            sql_update_phong = "UPDATE PHONG SET TinhTrang = 'Đã đặt' WHERE MaPhong = %s"
             cursor.execute(sql_update_phong, (dp.MaPhong,))
 
             conn.commit()  # Hoàn tất transaction
             return dp.dict(), None
     except Exception as e:
         conn.rollback()
-        if "Duplicate entry" in str(e):
-            return None, "Mã đặt phòng đã tồn tại."
-        if "foreign key constraint fails" in str(e):
-            return None, "Mã khách hàng hoặc mã phòng không hợp lệ."
+        # Trả về lỗi CSDL để frontend có thể hiển thị
         return None, str(e)
     finally:
         if conn:
@@ -60,12 +58,10 @@ def get_all_detailed(trang_thai: Optional[str], ngay: Optional[date]):
 
     try:
         with conn.cursor() as cursor:
-            # === SỬA LỖI SQL DỰA TRÊN SCHEMA BẠN CUNG CẤP ===
             base_sql = """
                 SELECT
                     dp.MaDatPhong, dp.NgayNhanPhong, dp.NgayTraPhong,
                     dp.TrangThaiDatPhong, dp.MaKH, dp.MaPhong,
-                    -- SỬA Ở ĐÂY: Lấy cột MaPhong từ bảng PHONG và đặt tên là TenPhong
                     p.MaPhong AS TenPhong, 
                     CONCAT(k.Ho, ' ', IFNULL(k.TenDem, ''), ' ', k.Ten) AS TenKhachHang
                 FROM DATPHONG dp
